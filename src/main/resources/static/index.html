@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Coba Index</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+
+    <!--images/foodfood-9D69-4FE85F64C16C.jpg-->
+    <div class="container" ng-app="AppUpload">
+        <div class="page-header" ng-controller="ControllerUpload">
+
+            <!--modal update-->
+            <div class="modal fade" id="formUpdate" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog" role="dialog">
+                    <div class="modal-content" role="document">
+                        <div class="modal-header">
+                            <button class="close" data-dismiss="modal">
+                                <span aria-hidden="true">Close</span>
+                            </button>
+                            <br/>
+                            <h4>Update Food</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-horizontal" id="formUpdateFood">
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">ID :</label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" name="id" ng-model="name.id" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Name:</label>
+                                    <div class="col-lg-6">
+                                        <input type="hidden" name="code" ng-model="name.code">
+                                        <input type="text" class="form-control" ng-model="name.name" name="name" placeholder="Name">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-success" ng-click="updateFix()">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                Update
+                            </button>
+                            <button class="btn btn-warning" data-dismiss="modal">
+                                <span class="glyphicon glyphicon-refresh"></span>
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--modal update-->
+
+            <!--modal insert-->
+            <div class="modal fade" id="formFood" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog" role="dialog">
+                    <div class="modal-content" role="document">
+                        <div class="modal-header">
+                            <button class="close" data-dismiss="modal">
+                                <span aria-hidden="true">Close</span>
+                            </button>
+                            <br/>
+                            <h4>Insert Food</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-horizontal" id="myForm">
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Name :</label>
+                                    <div class="col-lg-6">
+                                        <input type="text" placeholder="Name food"  name="name" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">File :</label>
+                                    <div class="col-lg-6">
+                                        <input type="file" name="file" file-model="file" placeholder="Upload file" class="form-control">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button ng-click="fixSaved()" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-upload"></span>
+                                Save and upload !
+                            </button>
+                            <button class="btn btn-danger" data-dismiss="modal">
+                                <span class="glyphicon glyphicon-refresh"></span>
+                                Cancel Save !
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--modal insert-->
+
+            <div class="col-lg-10 col-lg-offset-2">
+            </div>
+            <h3 class="alert alert-info">Spirng boot rest upload</h3>
+            <button type="button"
+                    data-target="#formFood"
+                    data-toggle="modal"
+                    ng-click="openModal()" class="btn btn-primary">
+                <span class="glyphicon glyphicon-plus-sign"></span>
+                Add Data
+            </button>
+            <div class="page-header">
+                <table class="table table-bordered table-hover table-striped">
+                    <thead>
+                    <th>Images</th>
+                    <th>ID Food</th>
+                    <th>Name</th>
+                    <th>Option</th>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="food in foodList">
+                        <td><img ng-src="http://localhost/server-poto/{{food.code}}.jpg"
+                                 width="100px" height="100px"></td>
+                        <td>{{food.id}}</td>
+                        <td>{{food.name}}</td>
+                        <td>
+                            <button class="btn btn-primary"
+                                    ng-click="editFood(food)"
+                                    data-toggle="modal"
+                                    data-target="#formUpdate">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                Update
+                            </button>
+                            <button class="btn btn-danger">
+                                <span class="glyphicon glyphicon-trash"></span>
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <th>Images</th>
+                    <th>ID Food</th>
+                    <th>Name</th>
+                    <th>Option</th>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/jquery-2.2.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/myapp/service.js"></script>
+    <script type="text/javascript" src="js/myapp/app.js"></script>
+
+</body>
+</html>
